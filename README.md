@@ -2,5 +2,5 @@
 
 ConfigFile Path:
 ```
-"$HOME/.traefik/
+$HOME/.traefik/
 ```
