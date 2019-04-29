@@ -1,6 +1,6 @@
 FROM netyazilim/alpine-base:3.9
 
-ARG VERSION=v1.7.10
+ARG VERSION=v1.7.11
 
 RUN wget --quiet --output-document=/bin/traefik https://github.com/containous/traefik/releases/download/${VERSION}/traefik_linux-amd64 && \
        chmod +x /bin/traefik
