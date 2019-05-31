@@ -1,4 +1,4 @@
-# Traefik v1.7.11
+# Traefik v1.7.12
 
 ConfigFile Path:
 ```
