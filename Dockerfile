@@ -1,4 +1,4 @@
-FROM netyazilim/alpine-base:3.9
+FROM netyazilim/alpine-base:3.10
 
 ARG VERSION=v1.7.12
 
