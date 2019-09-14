@@ -2,7 +2,10 @@ defaultEntryPoints = ["http"]
 [entryPoints]
   [entryPoints.http]
   address = ":80"
+  [entryPoints.webui]
+  address = ":8080"
+    
   
-  
-[web]
-address = ":8080"
+[api]
+entryPoint = "webui"
+dashboard = true

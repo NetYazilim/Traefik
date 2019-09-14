@@ -1,24 +1,22 @@
-FROM netyazilim/alpine-base:3.10
-
+FROM alpine:3.10 AS builder
 ARG VERSION=v1.7.16
-
-RUN wget --quiet --output-document=/bin/traefik https://github.com/containous/traefik/releases/download/${VERSION}/traefik_linux-amd64 && \
-       chmod +x /bin/traefik
+RUN apk update && apk add --no-cache ca-certificates libcap && update-ca-certificates  && \
+    mkdir /traefik && \
+    wget --quiet --output-document=/traefik/traefik https://github.com/containous/traefik/releases/download/${VERSION}/traefik_linux-amd64 && \
+    chmod +x /traefik/traefik && \
+    addgroup -S -g 10101 appuser && \
+    adduser -S -D -u 10101 -s /sbin/nologin -h /appuser -G appuser appuser && \
+    chown -R appuser:appuser /traefik/traefik && \
+	setcap 'cap_net_bind_service=+ep' /traefik/traefik
 
 FROM scratch
-
 LABEL maintainer "Levent SAGIROGLU <LSagiroglu@gmail.com>"
-	   
 EXPOSE 80 443 8080 
 ENV HOME "/etc"
-VOLUME /shared
 	   
-COPY --from=0 /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/ca-certificates.crt
-COPY --from=0 /etc/localtime /etc/localtime
-COPY --from=0 /etc/timezone /etc/timezone
-
-COPY --from=0 /bin/traefik /bin/traefik
-
+COPY --from=builder /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/ca-certificates.crt
+COPY --from=builder /etc/group /etc/passwd /etc/
+COPY --from=builder /traefik /traefik
 COPY traefik.toml /etc/.traefik/traefik.toml
-
-ENTRYPOINT ["/bin/traefik"]
+USER appuser
+ENTRYPOINT ["/traefik/traefik"]
