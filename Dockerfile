@@ -19,4 +19,4 @@ COPY --from=builder /etc/group /etc/passwd /etc/
 COPY --from=builder /traefik /
 COPY traefik.toml /etc/.traefik/traefik.toml
 USER appuser
-ENTRYPOINT ["/traefik/traefik"]
+ENTRYPOINT ["/traefik"]
