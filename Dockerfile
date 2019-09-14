@@ -6,8 +6,8 @@ RUN apk update && apk add --no-cache ca-certificates libcap && update-ca-certifi
     chmod +x /traefik/traefik && \
     addgroup -S -g 10101 appuser && \
     adduser -S -D -u 10101 -s /sbin/nologin -h /appuser -G appuser appuser && \
-    chown -R appuser:appuser /traefik/traefik && \
-	setcap 'cap_net_bind_service=+ep' /traefik/traefik
+    chown -R appuser:appuser /traefik/traefik 
+RUN	setcap 'cap_net_bind_service=+ep' /traefik/traefik
 
 FROM scratch
 LABEL maintainer "Levent SAGIROGLU <LSagiroglu@gmail.com>"
