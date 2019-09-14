@@ -16,7 +16,7 @@ ENV HOME "/etc"
 	   
 COPY --from=builder /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/ca-certificates.crt
 COPY --from=builder /etc/group /etc/passwd /etc/
-COPY --from=builder /traefik /traefik
+COPY --from=builder /traefik /
 COPY traefik.toml /etc/.traefik/traefik.toml
 USER appuser
 ENTRYPOINT ["/traefik/traefik"]
