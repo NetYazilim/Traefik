@@ -1,5 +1,5 @@
 FROM alpine:3.10 AS builder
-ARG VERSION=v1.7.16
+ARG VERSION=v1.7.18
 RUN apk update && apk add --no-cache ca-certificates libcap && update-ca-certificates  && \
     mkdir /traefik && \
     wget --quiet --output-document=/traefik/traefik https://github.com/containous/traefik/releases/download/${VERSION}/traefik_linux-amd64 && \
