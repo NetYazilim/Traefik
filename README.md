@@ -1,4 +1,4 @@
-# Traefik v1.7.16
+# Traefik v1.7.18
 
 https://traefik.io/
 
