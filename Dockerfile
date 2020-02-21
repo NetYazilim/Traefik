@@ -1,5 +1,5 @@
-FROM alpine:3.10 AS builder
-ARG VERSION=v1.7.19
+FROM alpine:3.11 AS builder
+ARG VERSION=v1.7.21
 RUN apk update && apk add --no-cache ca-certificates && update-ca-certificates  && \
     mkdir /traefik && \
     wget --quiet --output-document=/traefik/traefik https://github.com/containous/traefik/releases/download/${VERSION}/traefik_linux-amd64 && \
